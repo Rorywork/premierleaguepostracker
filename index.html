@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+		<body>
+
+		        <h1 class="header">Premier League Weekly Position Tracker</h1>
+
+		    
+			<div id="svgContainer" class="graph-container">
+				<svg width="4000" height="530" class="graph"></svg>
+			</div>
+			<br>
+				<select multiple id="selector" class="selector"></select>
+				<br>
+<p class="infotext">Hold down the Ctrl (windows) <br> Command (Mac) button to select <br> multiple teams</p>
+
+
+					<button id="SelectBtn" class="teamsbutton">Select Teams</button>
+					<br>
+						<br>
+							<div id="userInstructions" class="userInstructions" align="center">
+You are viewing
+
+								<button class="weekbutton" id="weekBtn">Week-1</button>&nbsp;of the English Premiership League positions
+								<br>
+Click the button above to display the next week's positions
+
+								</div>
+								<script src="https://d3js.org/d3.v4.min.js"></script>
+								<script type="text/javascript" src="script.js"></script>
+			</body>
+</html>
