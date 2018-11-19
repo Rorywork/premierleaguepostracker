@@ -30,6 +30,11 @@
   stroke-width: 1px;
   shape-rendering: crispEdges;
 }
+.axis text {
+  fill: white;
+  stroke: white;
+}
+
 .x path {
 	display: none;
 }
@@ -69,7 +74,9 @@ body {
   color: white;
   font-weight: bold;
   background-color: rgb(0,0,0,0.7);
-  height: 50px;
+  height: 30px;
+  font-size: 20px;
+  margin-bottom: 30px;
 
 }
 
@@ -81,10 +88,14 @@ body {
   margin: 0 auto;
 }
 
+#text{
+  font-size: 20px;
+}
+
 
 .selector{
   margin-top: 40px;
-  transform: translateY(-650px);
+  transform: translateY(-632px);
   height: 350px;
   border: solid 2px black;
   background-color: rgb(0,0,0,0.7);
@@ -100,6 +111,7 @@ body {
 }
 
 .infotext{
+  padding-top: 10px;
   font-size: 12px;
   font-family: sans-serif;
   transform: translateY(-650px);

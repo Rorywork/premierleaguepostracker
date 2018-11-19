@@ -273,9 +273,9 @@ g.selectAll(".bar")
  .attr("width", rectWidth)
  //.attr("fill", "blue")
  .attr("fill", function(d) {
-  if (team2Watch.includes(d.team)) return "rgb(0,255,135, 0.8)";
+  if (team2Watch.includes(d.team)) return "rgb(0,255,135, 0.7)";
   else {
-   return "rgb(233,0,82,0.8)";
+   return "rgb(233,0,82,0.6)";
   }
  })
 
@@ -311,7 +311,7 @@ g.selectAll(".image")
  .append("image")
  .attr("class", "image")
  .attr("xlink:href", function(d) {
-  return "file:" + d.team + ".png"
+  return "images/" + d.team + ".PNG"
  })
  .attr("x", "5")
  .attr("y", function(d) {
@@ -328,7 +328,7 @@ g.append("text")
  .attr("y", 505)
  .attr("font-family", "sans-serif")
  .attr("fill", "white")
- .attr("font-size", "12px");
+ .attr("font-size", "14px");
 
 var selector = d3.select("#selector");
 
@@ -396,9 +396,9 @@ function changeSort(z, col) {
   })
   .attr("width", rectWidth)
   .attr("fill", function(d) {
-   if (team2Watch.includes(d.team)) return "rgb(0,255,135, 0.5)";
+   if (team2Watch.includes(d.team)) return "rgb(0,255,135, 0.7)";
    else {
-    return "rgb(233,0,82,0.5)";
+    return "rgb(233,0,82,0.6)";
    }
   });
 
@@ -432,7 +432,7 @@ function changeSort(z, col) {
   .append("image")
   .attr("class", "image" + col)
   .attr("xlink:href", function(d) {
-   return "file:" + d.team + ".png"
+   return "images/" + d.team + ".PNG"
   })
   .attr("x", rectWidth * (col - 1) + ((col - 1) * spacer) + 5)
   .attr("y", function(d) {
@@ -485,14 +485,15 @@ function changeSort(z, col) {
    return x0(d.id) + (y.bandwidth() / 2) - 10;
   });
 
- // Add the text for the initial Week No.
+ // Add the text for the current Week No.
  g.append("text")
   .attr("class", "textWeekNum")
   .text("Week-" + (col + 1).toString())
   .attr("x", (rectWidth * col) + (col * spacer) + 55)
   .attr("y", 505)
   .attr("font-family", "sans-serif")
-  .attr("font-size", "12px");
+  .attr("fill", "white")  
+  .attr("font-size", "14px");
 
 }
 
