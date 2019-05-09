@@ -123,3 +123,10 @@ body {
   color: white;
   background-color: black;
 }
+
+
+.card-body{
+  color: red;
+  background-color: white;
+  font-family: cursive;
+}
