@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html>
-	<meta charset="utf-8">
-		<link rel="stylesheet" href="style.css" type="text/css"/>
-		<body>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css" type="text/css" />
 
-		        <div class="header">
-		        
-		        <h1 id="text">Premier League Weekly Position Tracker</h1>
-		        
-		        </div>
+<body>
 
-		    
-			<div id="svgContainer" class="graph-container">
-				<svg width="4000" height="530" class="graph"></svg>
-			</div>
-			<br>
-				<select multiple id="selector" class="selector"></select>
-				<br>
-<p class="infotext">Hold down the Ctrl (windows) <br> Command (Mac) button to <br>select multiple teams</p>
+	<div class="header">
+
+		<h1 id="text">English Premier League 2018/19 Weekly League Position Tracker</h1>
+		Currently displaying&nbsp;<button class="weekbutton" id="weekBtn">-</button>&nbsp;Click to move forward.
+	</div>
 
 
-					<button id="SelectBtn" class="teamsbutton">Select Teams</button>
-					<br>
-						<br>
-							<div id="userInstructions" class="userInstructions" align="center">
-You are viewing
+	<div id="svgContainer" class="graph-container">
+		<svg width="6250" height="530" class="graph"></svg>
+	</div>
+	
+	<br>
+	
+	<div id="selector" class="selector"></div>
+	<br>
+	<button id="SelectBtn" class="teamsbutton">Select Teams to track</button>
+	<p class="infotext">Press the Ctrl key (Windows) <br> Command (Mac) key to <br>select multiple teams.(Max 5)</p>
+	<br>
+	<br>
+	</div>
+	
+	<div class="userInstructions">
+	<p class="weeklyImprovement">Watch this space for weekly changes......</p>
+	</div>
 
-								<button class="weekbutton" id="weekBtn">Week-1</button>&nbsp;of the English Premiership League positions
-								<br>
-Click the button above to display the next week's positions
+	<div class="teamTrackingStats">
+	<p class="weeklyTeamTracking">Team Tracking Stats</p>
+	</div>
+	
+	
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</body>
 
-								</div>
-								<script src="https://d3js.org/d3.v4.min.js"></script>
-								<script type="text/javascript" src="script.js"></script>
-			</body>
 </html>
