@@ -64,7 +64,7 @@ if (isChrome) {
     var delaySpeed = 50                     // Animation delay speed
     
     var JSONFile = "PremleaguePos.json"         // JSON data file to load
-    var team2Watch = ["West Ham Utd", "AFC Bournemouth"];    // Array of Initial teams to be tracked in selection box
+    var team2Watch = ["West Ham Utd", "Newcastle Utd"];    // Array of Initial teams to be tracked in selection box
     
     // Initialisation variables
     var isSorted = false;                   // Initial Sort status of bars
@@ -208,7 +208,7 @@ if (isChrome) {
         
 
         // Start of code to handle the team2watch selection
-        var selector = d3.select('#selector');
+        var selector = d3.select('#team-selector');
 
         // Create array with teamNames sorted alphabetically
         var teamNames = data.map(function(d) {
@@ -550,32 +550,42 @@ if (isChrome) {
         function teamTrackingStats(t, weekNo) {
             
             var retArray = [];
+            var numTeams = data.length;                         // Determine number of teams in data
             var teamSeasonObj = data.filter(({team}) => team === t);        // filter JSON for team season data
             var teamSeasonArray = Object.keys(teamSeasonObj[0]).map(function(_) { return teamSeasonObj[0][_]; })    // Convert record to Array
             var teamCurrentPos = teamSeasonArray[weekNo + 2]                // assign current position in array to variable ( + 2 to account for "id" and "team")
-            console.log(teamCurrentPos);
+            //console.log(teamCurrentPos);
             
             const ChampionsLeaguePos = 4;
             const EuropaLeaguePos = 6;
             const RelegationPos = 18;
             
             // Mutiple conditionals comparing current position with Qualification and relegation
-            if (teamCurrentPos <= ChampionsLeaguePos) { 
+            
+            if (teamCurrentPos == 1) { 
+                retArray.push("are top of the league and in a Champions League qualifying position!")
+                retArray.push("are " + (RelegationPos - teamCurrentPos).toString() + " away from the relegation zone");
+            }
+            if (teamCurrentPos <= ChampionsLeaguePos && teamCurrentPos != 1 ) { 
                 retArray.push("are in a Champions League and Europa League qualifying position!")
                 retArray.push("are " + (RelegationPos - teamCurrentPos).toString() + " away from the relegation zone");
             }
             if (teamCurrentPos <= EuropaLeaguePos && teamCurrentPos > ChampionsLeaguePos ) { 
-                retArray.push("are in a Europa League qualifying postion and " + (teamCurrentPos - ChampionsLeaguePos.toString()) + " from a Champions League qualifying position!")
+                retArray.push("are in a Europa League qualifying position and " + (teamCurrentPos - ChampionsLeaguePos.toString()) + " from a Champions League qualifying position!")
                 retArray.push("are " + (RelegationPos - teamCurrentPos).toString() + " away from the relegation zone");
             }
             if (teamCurrentPos > EuropaLeaguePos && teamCurrentPos < RelegationPos ) { 
-                retArray.push("are " + (teamCurrentPos - EuropaLeaguePos.toString()) + " away from a Europa League qualifying postion!")
+                retArray.push("are " + (teamCurrentPos - EuropaLeaguePos.toString()) + " away from a Europa League qualifying position!")
                 retArray.push("are " + (RelegationPos - teamCurrentPos).toString() + " away from the relegation zone");
             }
-            if (teamCurrentPos > EuropaLeaguePos && teamCurrentPos >= RelegationPos ) { 
-                retArray.push("are " + (teamCurrentPos - EuropaLeaguePos.toString()) + " away from a Europa League qualifying postion!")
-                retArray.push("are in the relegation zone");
-            }       
+            if (teamCurrentPos > EuropaLeaguePos && teamCurrentPos >= RelegationPos && teamCurrentPos != numTeams ) { 
+                retArray.push("are " + (teamCurrentPos - EuropaLeaguePos.toString()) + " away from a Europa League qualifying position!")
+                retArray.push("are in the relegation zone of the league");
+            }
+            if (teamCurrentPos == numTeams ) { 
+                retArray.push("are " + (teamCurrentPos - EuropaLeaguePos.toString()) + " away from a Europa League qualifying position!")
+                retArray.push("are at the bottom of the league table");
+            }
             return retArray;
         }
 
@@ -602,12 +612,29 @@ if (isChrome) {
                     .text(colTextPrefix + (wNum + 1).toString() + ": " + BestWorstWeekly[0] + " are the best improvers on last week. " + BestWorstWeekly[1] + " have deteriorated the most.")
                 copyandTransform("v" + (wNum + 1).toString(), wNum);       // Execute the next week's data copy and transform function
                 
-                var teamInfo = teamTrackingStats("AFC Bournemouth", wNum);
-                console.log(teamInfo);
+                var teamInfo
+                team2Watch.forEach(function (t,index) {
+                    teamInfo = teamTrackingStats(t, wNum);
+                    console.log(teamInfo);
+                    console.log(t);
+                    d3.select("#team-name-" + index.toString()).text(t);
+                    d3.select("#team-status-"+ index.toString()).text(t + " " + teamInfo[0] + " They " + teamInfo[1]);
+                    //d3.select("#team-image-0").attr("xlink:href","images/" + t + ".PNG")
+                    d3.select("#team-image-"+ index.toString()).attr("src","images/" + t + ".PNG")
+                    
+                    //.attr("xlink:href", function(d) {
+                    //return "images/" + d.team + ".PNG"
+                    
+                });
+            
+                
+                
+                //console.log(teamInfo);
+                //console.log(team2Watch);
                 d3.selectAll(".weeklyTeamTracking")
                     .text("AFC Bournemouth " + teamInfo[0] + " They " + teamInfo[1]);
                 
-                // dummy test
+                // To be used at end of season
                 //overallTeamSeasonStats("AFC Bournemouth");
                 
             }
